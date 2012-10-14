@@ -21,4 +21,22 @@ unsigned short *memsetw(unsigned short *dest, unsigned short val, int count) {
      * are unsigned short */
 }
 
+int strlen(const char *str) {
+    /* This loops through character array 'str'
+     * returning how many chars it needs to check 
+     * before it finds a 0.
+     * In simple words, it returns the length in bytes
+     * of a string.*/
+}
 
+/* We will use this later on for reading from 
+ * the I/O ports to get data from devices such
+ * as the keyboard. We are using what is called
+ * 'inline assembly' in these routines to actually
+ *  do the work */
+unsigned char inport (unsigned short _port) {
+    unsigned char rv;
+    /*"N" : Const in range 0 to 255(for out instruction) */
+    __asm__ __volatile__("inb %1, %0" : "=a" (rv): "dN"(_port));
+    return rv;
+}
