@@ -32,7 +32,9 @@ mboot:
 ; insert an 'exter _main' followed by 'call _main', right
 ; before the 'jmp $'.
 stublet:
-    extern _main
+    extern _main	; The compiler gcc will put an underscore in front of all of the function and variable names when it compiles.
+					; Therefore, to reference a function or variable from our assembly code, we must add an underscore to the function name
+					; if the function is in a C source file!!!
     call _main
     jmp $
 
