@@ -49,3 +49,12 @@ unsigned char inportb (unsigned short _port) {
 void outportb(unsigned short _port, unsigned char _data) {
     __asm__ __volatile__("outb %1, %0" : : "dN"(_port), "a" (_data));
 }
+
+/* This is a very simple main() function. All it does is sit 
+ * in an infinite loop. this will be like our 'idle' loop */
+void main() {
+	/* leave this loop in. There is an endlessloop in 
+	 * 'start.asm' also, if yu accidentally delete this next line*/
+	for( ; ; )
+		;
+}
