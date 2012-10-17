@@ -26,6 +26,9 @@ unsigned short *memsetw(unsigned short *dest, unsigned short val, int count) {
      * Your code can be an exact copy of the above,
      * provided that your local variables if any, 
      * are unsigned short */
+    unsigned short *temp = (unsigned short *)dest;
+    for( ; count != 0; count--) *temp++ = val;
+    return dest;
 }
 
 int strlen(const char *str) {
