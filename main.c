@@ -37,6 +37,9 @@ int strlen(const char *str) {
      * before it finds a 0.
      * In simple words, it returns the length in bytes
      * of a string.*/
+    size_t retval;
+    for(retval = 0; *str != '\0'; str++) retval++;
+    return retval;
 }
 
 /* We will use this later on for reading from 
