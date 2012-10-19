@@ -1,16 +1,23 @@
 #include <system.h>
 
 /* You will need to code these up yourself*/
-unsigned char *memcpy(unsigned char *dest, const unsigned cahr *src, int count) {
+void *memcpy(void *dest, const void *src, size_t count) {
     /* Add code here to copy 'count' bytes of data
      * from 'src' to 'dest', finally return 'dest'
      * */
+    const char *sp = (const char *)src;
+    char *dp = (char *)dest;
+    for( ; count != 0; count--) *dp++ = *sp++;
+    return dest;
 }
 
-unsigned char *memset(unsigned char *dest, unsigned char val, int count) {
+void *memset(void *dest, char val, size_t count) {
     /* Add code here to set 'count' bytes in 'dest' to
      * 'val'. Again, return 'dest'
      * */
+    char *temp = (char *)dest;
+    for( ; count != 0; count--) *temp++ = val;
+    return dest;
 }
 
 unsigned short *memsetw(unsigned short *dest, unsigned short val, int count) {
@@ -19,6 +26,9 @@ unsigned short *memsetw(unsigned short *dest, unsigned short val, int count) {
      * Your code can be an exact copy of the above,
      * provided that your local variables if any, 
      * are unsigned short */
+    unsigned short *temp = (unsigned short *)dest;
+    for( ; count != 0; count--) *temp++ = val;
+    return dest;
 }
 
 int strlen(const char *str) {
@@ -27,6 +37,9 @@ int strlen(const char *str) {
      * before it finds a 0.
      * In simple words, it returns the length in bytes
      * of a string.*/
+    size_t retval;
+    for(retval = 0; *str != '\0'; str++) retval++;
+    return retval;
 }
 
 /* We will use this later on for reading from 
