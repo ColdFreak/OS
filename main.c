@@ -53,8 +53,22 @@ void outportb(unsigned short _port, unsigned char _data) {
 /* This is a very simple main() function. All it does is sit 
  * in an infinite loop. this will be like our 'idle' loop */
 void main() {
+
+	int i;
+	gdt_install();
+	idt_install();
+	isrs_install();
+	irq_install();
+	init_video();
+	timer_install();
+	keyboard_install();
+
+	__asm__ __volatile__ ("sti");
+	puts("Hello World\n");
+	
 	/* leave this loop in. There is an endlessloop in 
 	 * 'start.asm' also, if yu accidentally delete this next line*/
+
 	for( ; ; )
 		;
 }
