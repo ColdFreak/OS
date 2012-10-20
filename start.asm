@@ -40,7 +40,26 @@ stublet:
 
 
 ; Shortly we will add code for loading the GDT right here!
+; This will set up our new sgement register. We need to do 
+; something special in order to se CS. We do what is called
+; a far jump. A jump that includes a sgement as well as an 
+; offset.
+; This is declared in C as ' extern void gdt_flush()'
 
+global _gdt_flush
+extern _gp
+
+_gdt_flush:
+	lgdt [_gp] ; Load the GDT with our '_gp' which is a special pointer
+	mov ax, 0x10 ; 0x10 is the offset in the GDT to our data segment
+	mov ds, ax
+	mov es, ax
+	mov fs, ax
+	mov gs, ax
+	mov ss, ax
+	jmp 0x08:flush2 ; 0x08 is the offset to our code sgement: Far jump!
+flush2:
+	ret	; Returns back to the C code!
 
 ; In just a few pages in this tutorial, we will add our Interrupt
 ; Service Routines(ISRs) right here!
@@ -53,3 +72,5 @@ stublet:
 SECTION .bss
     resb 8192   ; This reserves 8K bytes of memory here
 _sys_stack:
+
+
