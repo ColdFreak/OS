@@ -50,6 +50,7 @@ global _gdt_flush
 extern _gp
 
 _gdt_flush:
+;http://wiki.osdev.org/Global_Descriptor_Table
 	lgdt [_gp] ; Load the GDT with our '_gp' which is a special pointer
 	mov ax, 0x10 ; 0x10 is the offset in the GDT to our data segment
 	mov ds, ax
